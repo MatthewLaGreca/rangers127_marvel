@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-fluid justify-content-center">
+    <div class="row shop-header p-5">
+        <div class="col-3 d-flex flex-column justify-content-center">
+            <h2>Welcome to your collection!</h2>
+            {% if current_user.is_authenticated %}
+            <h5>All your comics will show up here</h5>
+            <a href="{{ url_for('site.create' )}}" class="btn btn-outline-dark mt-3">Add a comic</a>
+            {% else %}
+            <h5>Please Log Into Your Account</h5>
+            <a href="/signin" class="btn btn-outline-dark mt-3">Log In</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Stats of the current user's comics -->
+{% if current_user.is_authenticated %}
+<div class="row bg-dark p-3 collection-stats">
+    <div class="col d-flex-justify-content-center">Total # of Customers: {{ stats.customers }}</div> 
+    <div class="col d-flex-justify-content-center">Total Sales : $ {{ stats.sales }}</div>
+    <div class="col d-flex-justify-content-center">Total Comics: {{ stats.comics }}</div>
+</div>
+
+<!-- Displaying the current collection of comic books -->
+{% for comic in collection %}
+    <div class="row mt-5 mb-5 justify-content-center">
+        <div class="card d-flex rounded shadow flex-row w-50 p-3">
+            <div class="d-flex align-items-center" style="max-width:230px">
+                <img src="{{ comic.image }}" class="img-fluid rounded" alt="Insert comic image here">
+            </div>
+            <div class="card-body d-flex flex-column justify-content-center p-4">
+                <h5 class="card-title">{{ comic.title }}</h5>
+                <p class="card-text">{{ comic.description }}</p>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Series: {{ comic.series }}</li>
+                    <li class="list-group-item">Volume: {{ comic.volume }}</li>
+                    <li class="list-group-item">Quantity: {{ comic.quantity }}</li>
+                    {% if comic.for_sale}
+                        <li class="list-group-item">Price: {{ comic.price }}</li>
+                    {% else %}
+                        <span>{{ comic.title }} is NOT for sale</span>
+                    {% endif %}
+                    {% if comic.page_count %}
+                        <li class="list-group-item">Page Count: {{ comic.page_count }}</li>
+                    {% endif %}
+                    {% if comic.author %}
+                        <li class="list-group-item">Author: {{ comic.author }}</li>
+                    {% endif %}
+                    {% if comic.isbn %}
+                        <li class="list-group-item">ISBN: {{ comic.isbn }}</li>
+                    {% endif %}
+                </ul>
+                <div class="mt-2">
+                    <a href="{{ url_for('site.update', id=comic.comic_id ) }}" class="card-link btn btn-warning">Update</a>
+                    <a href="{{ url_for('site.delete', id=comic.comic_id ) }}" class="card-link btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+
+
+
+{% else %}
+<div class="row mt-5 mb-5 d-flex align-items-center">
+    <h3 class="d-flex justify-content-center">Your Comics Will Show Here Once Logged In</h3>
+</div>
+{% endif %}
+
+{% endblock content %}

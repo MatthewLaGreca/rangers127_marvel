@@ -1,0 +1,75 @@
+{% block content %}
+
+
+            <form class="row g-3" method="POST">
+                {{ form.hidden_tag() }}
+                <div class="col-md-6">
+                    {{ form.series.label }}
+                    {{form.series(class='form-control mt-2', placeholder = 'Carnage')}}
+                    {% for error in form.series.errors %}
+                        <span class="err-msg">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="col-md-6">
+                    {{ form.volume.label }}
+                    {{form.volume(class='form-control mt-2', placeholder = '1')}}
+                    {% for error in form.volume.errors %}
+                        <span class="err-msg">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="col-md-12">
+                    {{ form.title.label }}
+                    {{form.title(class='form-control mt-2', placeholder = 'There Will Be Carnage')}}
+                    {% for error in form.title.errors %}
+                        <span class="err-msg">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="col-12">
+                    {{ form.description.label }}
+                    {{ form.description(class='form-control mt-2', placeholder = 'Cleatus Cassidy finds out he is dumb' )}}
+                </div>
+                <div class="col-4">
+                    {{ form.page_count.label }}
+                    {{ form.page_count(class='form-control mt-2', placeholder = '420' )}}
+                </div>
+                <div class="col-4">
+                    {{ form.author.label }}
+                    {{ form.author(class='form-control mt-2', placeholder = 'Stan Lee Eelnats' )}}
+                </div>
+                <div class="col-4">
+                    {{ form.isbn.label }}
+                    {{ form.isbn(class='form-control mt-2', placeholder = '1234567891011' )}}
+                </div>
+                <div class="col-md-12">
+                    {{ form.image.label }}
+                    {{form.image(class='form-control mt-2')}}
+                </div>
+                <div class="col-4">
+                    {{ form.price.label }}
+                    {{ form.price(class='form-control mt-2', placeholder = '4.20' )}}
+                    {% for error in form.price.errors %}
+                        <span class="err-msg">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="col-4">
+                    {{ form.quantity.label }}
+                    {{ form.quantity(class='form-control mt-2', placeholder = '100' )}}
+                    {% for error in form.quantity.errors %}
+                        <span class="err-msg">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <!-- Need to figure out the check mark box for for_sale -->
+                <div class="col-4">
+                    {{ form.for_sale.label }}
+                    {{ form.for_sale(class='form-check-input mt-2', type='checkbox' )}}
+                    {% for error in form.for_sale.errors %}
+                        <span class="err-msg">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="col-6">
+                    {{ form.submit(class='btn btn-primary') }}
+                </div>
+
+            </form>
+
+{% endblock content %}

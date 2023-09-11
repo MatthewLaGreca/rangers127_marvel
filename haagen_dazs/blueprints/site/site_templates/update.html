@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="containger d-flex justify-content-center align-items-center">
+    <div class="row my-5 p-5 shadow rounded border border-danger w-75">
+        <div class="col">
+            <h3>Update {{ comic.name }}</h3>
+            {% include 'comic_form.html' %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
